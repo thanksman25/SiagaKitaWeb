@@ -42,7 +42,8 @@
 
       <!-- CTA -->
       <a
-        href="#install"
+        href="https://github.com/thanksman25/SiagaKitaWeb/releases/download/V1.0/SiagaKita.apk"
+        download="SiagaKita.apk"
         id="nav-cta-download"
         class="hidden lg:flex items-center gap-2 px-5 py-2.5 rounded-xl font-semibold text-sm text-white transition-all duration-300 hover:shadow-lg hover:shadow-orange-500/30 hover:-translate-y-0.5"
         style="background: linear-gradient(135deg, #FF5722, #E64A19);"

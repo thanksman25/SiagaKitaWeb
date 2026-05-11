@@ -64,7 +64,8 @@
           Explore Ecosystem
         </a>
         <a
-          href="#install"
+          href="https://github.com/thanksman25/SiagaKitaWeb/releases/download/V1.0/SiagaKita.apk"
+          download="SiagaKita.apk"
           id="hero-cta-download"
           class="btn-download flex items-center gap-2"
         >

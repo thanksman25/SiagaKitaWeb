@@ -273,7 +273,7 @@
 
               <!-- Download button -->
               <a
-                href="/SiagaKita.apk"
+                href="https://github.com/thanksman25/SiagaKitaWeb/releases/download/V1.0/SiagaKita.apk"
                 download="SiagaKita.apk"
                 id="apk-download-btn"
                 class="btn-download inline-flex items-center gap-3 text-lg"
