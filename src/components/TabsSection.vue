@@ -273,7 +273,8 @@
 
               <!-- Download button -->
               <a
-                href="#"
+                href="/SiagaKita.apk"
+                download="SiagaKita.apk"
                 id="apk-download-btn"
                 class="btn-download inline-flex items-center gap-3 text-lg"
               >
@@ -283,7 +284,7 @@
                 Download APK — Android
               </a>
 
-              <p class="text-xs font-mono text-white/30 mt-4">Flutter Release Build • Requires Android 8.0+</p>
+              <p class="text-xs font-mono text-white/30 mt-4">Flutter Release Build • ~58 MB • Requires Android 8.0+</p>
 
               <!-- Install steps -->
               <div class="mt-12 text-left glass-card p-6 max-w-md mx-auto">
@@ -390,7 +391,7 @@ const archColors = ['#42A5F5', '#00ACD7', '#FF7043', '#AB47BC', '#FFA726']
 
 const appInfo = [
   { value: 'v2.0', label: 'Version' },
-  { value: '~28MB', label: 'Size' },
+  { value: '~58MB', label: 'Size' },
   { value: 'Free', label: 'Price' },
 ]
 
