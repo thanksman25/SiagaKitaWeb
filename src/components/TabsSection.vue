@@ -52,7 +52,7 @@
                     <p class="text-white/70 text-sm leading-relaxed">
                       This paper presents SiagaKita, an integrated tourism emergency response ecosystem that unifies real-time
                       incident reporting, GPS tracking, and multi-agency coordination. Designed to bridge the communication gap
-                      between tourists, volunteers, BASARNAS, and BPBD, SiagaKita is built on Flutter (mobile), Django REST
+                      between tourists, volunteers, BASARNAS, and BPBD, SiagaKita is built on Flutter (mobile), Golang
                       (backend), and WebSocket for real-time data. Key features include a 10-second SOS trigger, a Biometric
                       Ledger for victim identification, and a tactical dashboard for emergency agencies.
                     </p>
@@ -61,22 +61,31 @@
                   <div class="grid grid-cols-2 gap-4 pt-2">
                     <div v-for="meta in paperMeta" :key="meta.label" class="bg-white/5 rounded-xl p-3">
                       <div class="text-[10px] font-mono text-white/40 uppercase tracking-widest mb-1">{{ meta.label }}</div>
-                      <div class="text-sm font-semibold text-white">{{ meta.value }}</div>
+                      <div class="text-sm font-semibold" :class="meta.pending ? 'text-yellow-400' : 'text-white'">{{ meta.value }}</div>
                     </div>
                   </div>
                 </div>
 
-                <a
-                  href="#"
-                  id="paper-download-btn"
-                  class="inline-flex items-center gap-3 px-6 py-3 rounded-xl font-semibold text-sm text-white transition-all duration-300 hover:shadow-lg hover:shadow-orange-500/30 hover:-translate-y-0.5"
-                  style="background: linear-gradient(135deg, #FF5722, #E64A19);"
-                >
-                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
-                  </svg>
-                  Download Full Paper (PDF)
-                </a>
+                <!-- Pending state -->
+                <div class="rounded-2xl border border-yellow-500/30 bg-yellow-500/5 p-5 flex items-start gap-4">
+                  <div class="w-10 h-10 rounded-xl bg-yellow-500/15 border border-yellow-500/30 flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <svg class="w-5 h-5 text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                    </svg>
+                  </div>
+                  <div>
+                    <div class="text-sm font-bold text-yellow-300 mb-1">Paper Under Review</div>
+                    <p class="text-xs text-white/50 leading-relaxed">
+                      The full research paper is currently under editorial review. The download link will be available once the publication process is complete.
+                    </p>
+                    <div class="mt-3 flex items-center gap-2">
+                      <div class="flex gap-1">
+                        <span v-for="n in 5" :key="n" class="w-5 h-1.5 rounded-full" :class="n <= 3 ? 'bg-yellow-400' : 'bg-white/10'"></span>
+                      </div>
+                      <span class="text-[10px] font-mono text-yellow-400/70">3 / 5 stages complete</span>
+                    </div>
+                  </div>
+                </div>
               </div>
 
               <!-- Keywords & tech stack sidebar -->
@@ -111,56 +120,51 @@
               <h3 class="text-2xl font-black text-white mb-2">HKI Certificate</h3>
               <p class="text-white/50 text-sm mb-8">Copyright of Computer Program — Republic of Indonesia</p>
 
-              <!-- Certificate card mockup -->
-              <div class="relative rounded-2xl overflow-hidden border border-orange-500/30 bg-gradient-to-br from-navy-700 to-navy-900 p-1 mb-8">
-                <div class="rounded-xl bg-gradient-to-br from-[#0D2137] to-[#0A192F] p-8 md:p-12">
-                  <!-- Certificate header -->
-                  <div class="flex items-start justify-between mb-8">
-                    <div>
-                      <div class="text-xs font-mono text-white/30 uppercase tracking-widest mb-2">Republik Indonesia</div>
-                      <div class="text-xs font-mono text-white/30 uppercase tracking-widest">Kementerian Hukum dan HAM</div>
-                    </div>
-                    <div class="text-right">
-                      <div class="text-xs font-mono text-orange-400/70">EC00 2025</div>
-                      <div class="text-xs font-mono text-white/30">Registration No.</div>
-                    </div>
+              <!-- Pending state hero -->
+              <div class="relative rounded-2xl overflow-hidden border border-yellow-500/20 bg-gradient-to-br from-yellow-500/5 to-navy-900/80 p-12 mb-8 text-center">
+                <!-- Animated ring -->
+                <div class="relative mx-auto w-28 h-28 mb-8">
+                  <div class="absolute inset-0 rounded-full border-2 border-yellow-500/20 animate-ping-slow" style="animation-duration: 3s;"></div>
+                  <div class="absolute inset-2 rounded-full border border-yellow-500/10 animate-ping-slow" style="animation-duration: 3s; animation-delay: 1s;"></div>
+                  <div class="w-28 h-28 rounded-full border-2 border-dashed border-yellow-500/40 flex items-center justify-center">
+                    <svg class="w-12 h-12 text-yellow-400/70" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/>
+                    </svg>
                   </div>
+                </div>
 
-                  <div class="text-center mb-8">
-                    <div class="text-2xl font-black text-white mb-1">SERTIFIKAT PENCATATAN</div>
-                    <div class="text-sm font-mono text-orange-400">HAK CIPTA PROGRAM KOMPUTER</div>
-                  </div>
+                <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-mono font-semibold mb-4" style="background: rgba(234,179,8,0.15); border: 1px solid rgba(234,179,8,0.3); color: #FBBF24;">
+                  <span class="w-1.5 h-1.5 rounded-full bg-yellow-400 animate-pulse"></span>
+                  AWAITING ISSUANCE
+                </div>
 
-                  <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-                    <div v-for="field in hkiFields" :key="field.label" class="border-b border-white/10 pb-3">
-                      <div class="text-[10px] font-mono text-white/30 uppercase tracking-widest mb-1">{{ field.label }}</div>
-                      <div class="text-sm text-white/80">{{ field.value }}</div>
-                    </div>
-                  </div>
+                <h4 class="text-xl font-black text-white mb-3">Certificate Pending</h4>
+                <p class="text-white/50 text-sm max-w-md mx-auto leading-relaxed">
+                  The HKI intellectual property certificate for SiagaKita has been submitted to the Ministry of Law and Human Rights of the Republic of Indonesia and is currently awaiting official issuance.
+                </p>
 
-                  <div class="flex items-center justify-center gap-4 pt-4 border-t border-white/10">
-                    <div class="w-16 h-16 rounded-full border-2 border-orange-500/40 flex items-center justify-center animate-float">
-                      <svg class="w-7 h-7 text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+                <!-- Progress steps -->
+                <div class="mt-8 flex items-center justify-center gap-0">
+                  <div v-for="(step, i) in hkiSteps" :key="step.label" class="flex items-center">
+                    <div class="flex flex-col items-center gap-1.5">
+                      <div class="w-7 h-7 rounded-full flex items-center justify-center text-xs font-mono font-bold transition-all"
+                        :class="step.done ? 'bg-yellow-500 text-navy-900' : 'border border-white/20 text-white/30'">
+                        <svg v-if="step.done" class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
+                        <span v-else>{{ i + 1 }}</span>
+                      </div>
+                      <span class="text-[9px] font-mono uppercase tracking-wide" :class="step.done ? 'text-yellow-400' : 'text-white/20'">{{ step.label }}</span>
                     </div>
-                    <div>
-                      <div class="text-sm font-bold text-white">Registered &amp; Valid</div>
-                      <div class="text-xs font-mono text-white/40">Digital Certificate • 2025</div>
-                    </div>
+                    <div v-if="i < hkiSteps.length - 1" class="w-10 h-px mb-5" :class="step.done ? 'bg-yellow-500/40' : 'bg-white/10'"></div>
                   </div>
                 </div>
               </div>
 
-              <div class="flex justify-center">
-                <a
-                  href="#"
-                  id="hki-download-btn"
-                  class="inline-flex items-center gap-3 px-6 py-3 rounded-xl font-semibold text-sm border border-orange-500/40 text-orange-400 hover:bg-orange-500/10 transition-all duration-300"
-                >
-                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
-                  </svg>
-                  Download HKI Certificate
-                </a>
+              <!-- Info fields -->
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div v-for="field in hkiFields" :key="field.label" class="bg-white/5 rounded-xl p-4 border border-white/5">
+                  <div class="text-[10px] font-mono text-white/30 uppercase tracking-widest mb-1">{{ field.label }}</div>
+                  <div class="text-sm text-white/70">{{ field.value }}</div>
+                </div>
               </div>
             </div>
           </div>
@@ -340,18 +344,18 @@ const setTab = (id) => {
 const paperMeta = [
   { label: 'Authors', value: 'SiagaKita Team, 2025' },
   { label: 'Category', value: 'Applied Technology' },
-  { label: 'Platform', value: 'Flutter + Django' },
-  { label: 'Status', value: 'Published' },
+  { label: 'Platform', value: 'Flutter + Golang' },
+  { label: 'Status', value: 'Under Review', pending: true },
 ]
 
 const keywords = [
   'Emergency Response', 'Tourism Safety', 'Real-Time Tracking',
-  'Flutter', 'Django REST', 'WebSocket', 'GPS', 'SOS System', 'Biometric'
+  'Flutter', 'Golang', 'WebSocket', 'GPS', 'SOS System', 'Biometric'
 ]
 
 const techStack = [
   { name: 'Flutter', role: 'Mobile', color: '#42A5F5' },
-  { name: 'Django', role: 'Backend', color: '#66BB6A' },
+  { name: 'Golang', role: 'Backend', color: '#00ACD7' },
   { name: 'PostgreSQL', role: 'Database', color: '#AB47BC' },
   { name: 'WebSocket', role: 'Realtime', color: '#FF7043' },
   { name: 'Firebase', role: 'Notifications', color: '#FFA726' },
@@ -363,7 +367,15 @@ const hkiFields = [
   { label: 'Year First Published', value: '2025' },
   { label: 'Creator', value: 'SiagaKita Team' },
   { label: 'Copyright Holder', value: 'SiagaKita Team' },
-  { label: 'Status', value: 'Registered &amp; Active' },
+  { label: 'Status', value: 'Pending Issuance' },
+]
+
+const hkiSteps = [
+  { label: 'Draft', done: true },
+  { label: 'Submitted', done: true },
+  { label: 'Verified', done: true },
+  { label: 'Review', done: false },
+  { label: 'Issued', done: false },
 ]
 
 const posterFeatures = [
@@ -373,8 +385,8 @@ const posterFeatures = [
   { title: 'Multi-Agency', desc: 'Coordinated response' },
 ]
 
-const archLayers = ['Flutter App', 'Django API', 'WebSocket', 'PostgreSQL', 'Firebase']
-const archColors = ['#42A5F5', '#66BB6A', '#FF7043', '#AB47BC', '#FFA726']
+const archLayers = ['Flutter App', 'Golang API', 'WebSocket', 'PostgreSQL', 'Firebase']
+const archColors = ['#42A5F5', '#00ACD7', '#FF7043', '#AB47BC', '#FFA726']
 
 const appInfo = [
   { value: 'v2.0', label: 'Version' },
