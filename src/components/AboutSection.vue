@@ -9,14 +9,14 @@
       <div ref="headerRef" class="text-center mb-20 opacity-0 translate-y-8">
         <div class="pill-badge mb-4">
           <span class="w-1.5 h-1.5 rounded-full bg-orange-400"></span>
-          DOKUMENTASI EKOSISTEM
+          ECOSYSTEM DOCUMENTATION
         </div>
         <h2 class="text-4xl md:text-5xl font-black text-white mb-6">
           Integrated Safety <span class="text-gradient">Ecosystem</span>
         </h2>
         <p class="text-lg text-white/60 max-w-3xl mx-auto leading-relaxed">
-          SiagaKita adalah ekosistem kedaruratan pariwisata yang mengintegrasikan teknologi real-time 
-          untuk menghubungkan wisatawan, relawan, BASARNAS, dan BPBD dalam satu platform terpadu.
+          SiagaKita is an integrated tourism emergency ecosystem that leverages real-time technology
+          to connect tourists, volunteers, BASARNAS, and BPBD in a unified response platform.
         </p>
       </div>
 
@@ -35,12 +35,11 @@
           <div class="absolute top-0 left-0 w-5 h-5 border-t-2 border-l-2 border-orange-500/50 rounded-tl-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
           <div class="absolute bottom-0 right-0 w-5 h-5 border-b-2 border-r-2 border-orange-500/50 rounded-br-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
 
-          <!-- Icon -->
           <div
-            class="w-14 h-14 rounded-2xl flex items-center justify-center mb-4 text-2xl transition-all duration-300 group-hover:scale-110"
-            :style="{ background: `${actor.color}20`, border: `1px solid ${actor.color}40` }"
+            class="w-14 h-14 rounded-2xl flex items-center justify-center mb-4 font-black text-sm transition-all duration-300 group-hover:scale-110"
+            :style="{ background: `${actor.color}20`, border: `1px solid ${actor.color}40`, color: actor.color }"
           >
-            {{ actor.icon }}
+            {{ actor.initials }}
           </div>
 
           <!-- Role badge -->
@@ -83,7 +82,7 @@
               <div class="absolute inset-0 rounded-full animate-ping-slow opacity-30"
                 :style="{ background: pillar.color, animationDuration: `${3 + i}s` }">
               </div>
-              <span class="text-3xl relative z-10">{{ pillar.icon }}</span>
+              <span class="text-sm font-black relative z-10 font-mono" :style="{ color: pillar.color }">{{ pillar.abbr }}</span>
             </div>
 
             <div class="text-xs font-mono tracking-widest uppercase mb-3" :style="{ color: pillar.color }">
@@ -120,35 +119,35 @@ const hoveredActor = ref(null)
 
 const actors = [
   {
-    title: 'Wisatawan',
+    title: 'Tourist',
     role: 'Primary User',
-    icon: '🧭',
+    initials: 'TUR',
     color: '#FF5722',
-    desc: 'Pengguna aplikasi yang dapat melaporkan insiden dan mengirim SOS dalam 10 detik.',
+    desc: 'App users who can report incidents and trigger SOS in under 10 seconds.',
     data: ['SOS 1-tap activation', 'Biometric ID registration', 'Real-time location share', 'Offline-capable reporting'],
   },
   {
-    title: 'Relawan',
+    title: 'Volunteer',
     role: 'First Responder',
-    icon: '🦺',
+    initials: 'VOL',
     color: '#FF9800',
-    desc: 'Tim relawan terlatih yang menerima notifikasi taktis dan koordinat insiden secara real-time.',
+    desc: 'Trained volunteer teams who receive tactical push alerts and incident coordinates in real-time.',
     data: ['Push alert system', 'Incident assignment', 'Route navigation', 'Status update broadcast'],
   },
   {
     title: 'BASARNAS',
     role: 'SAR Authority',
-    icon: '🚁',
+    initials: 'SAR',
     color: '#2196F3',
-    desc: 'Badan SAR Nasional yang mengelola operasi pencarian dan penyelamatan skala besar.',
+    desc: 'National Search & Rescue Agency managing large-scale search and rescue operations.',
     data: ['Command dashboard', 'Multi-team dispatch', 'Resource allocation', 'After-action report'],
   },
   {
     title: 'BPBD',
     role: 'Disaster Agency',
-    icon: '🏛️',
+    initials: 'BPB',
     color: '#4CAF50',
-    desc: 'Badan Penanggulangan Bencana Daerah yang mengawasi situasi darurat wilayah secara menyeluruh.',
+    desc: 'Regional Disaster Management Agency overseeing emergency situations across the area.',
     data: ['Regional monitoring', 'Risk zone mapping', 'Public alert system', 'Inter-agency coord'],
   },
 ]
@@ -156,9 +155,9 @@ const actors = [
 const pillars = [
   {
     title: 'Zero-Friction Reporting',
-    icon: '⚡',
+    abbr: 'ZFR',
     color: '#FF5722',
-    desc: 'Pelaporan insiden dirancang seminimal mungkin gesekan — SOS aktif dalam 10 detik bahkan tanpa koneksi internet yang stabil.',
+    desc: 'Incident reporting is designed with minimal friction — SOS activates in under 10 seconds even without a stable internet connection.',
     specs: [
       { label: 'Response Time', value: '< 10s' },
       { label: 'Offline Mode', value: 'Active' },
@@ -167,9 +166,9 @@ const pillars = [
   },
   {
     title: 'Tactical Mobilization',
-    icon: '🎯',
+    abbr: 'TM',
     color: '#FF9800',
-    desc: 'Sistem dispatch cerdas yang secara otomatis menetapkan tim relawan terdekat berdasarkan lokasi GPS dan kapasitas.',
+    desc: 'An intelligent dispatch system automatically assigns the nearest volunteer team based on GPS location and capacity.',
     specs: [
       { label: 'Dispatch Speed', value: '< 30s' },
       { label: 'GPS Accuracy', value: '±5m' },
@@ -178,9 +177,9 @@ const pillars = [
   },
   {
     title: 'Real-Time Situational Awareness',
-    icon: '📡',
+    abbr: 'RTSA',
     color: '#2196F3',
-    desc: 'Dashboard terpusat memberikan visibilitas penuh kepada agen darurat — semua insiden, lokasi, dan status tim dalam satu layar.',
+    desc: 'A centralized dashboard gives emergency agencies full visibility — all incidents, locations, and team statuses on one screen.',
     specs: [
       { label: 'Update Freq', value: '< 2s' },
       { label: 'Data Source', value: 'WebSocket' },

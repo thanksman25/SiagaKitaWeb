@@ -18,7 +18,7 @@
             </div>
           </div>
           <p class="text-sm text-white/40 leading-relaxed">
-            Ekosistem kedaruratan pariwisata terpadu yang menghubungkan wisatawan, relawan, dan agen darurat.
+            Integrated tourism emergency ecosystem connecting tourists, volunteers, and emergency agencies.
           </p>
         </div>
 
@@ -52,7 +52,7 @@
       <!-- Bottom bar -->
       <div class="border-t border-white/10 pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
         <p class="text-xs font-mono text-white/20">
-          © 2025 SiagaKita. Hak Cipta Terdaftar — HKI Program Komputer.
+          © 2025 SiagaKita. All Rights Reserved — HKI Registered Computer Program.
         </p>
         <div class="flex items-center gap-2">
           <span class="w-2 h-2 rounded-full bg-green-400 animate-pulse"></span>

@@ -25,7 +25,7 @@
           :class="{ active: activeTab === tab.id }"
           @click="setTab(tab.id)"
         >
-          <span>{{ tab.icon }}</span>
+          <component :is="'span'" v-html="tab.iconSvg" class="w-4 h-4 flex-shrink-0"></component>
           <span>{{ tab.label }}</span>
         </button>
       </div>
@@ -38,7 +38,7 @@
             <div class="grid grid-cols-1 lg:grid-cols-5 gap-8">
               <!-- Main card -->
               <div class="lg:col-span-3 glass-card p-8 hud-border group">
-                <div class="pill-badge mb-6">📄 RESEARCH PAPER</div>
+                <div class="pill-badge mb-6">RESEARCH PAPER</div>
                 <h3 class="text-2xl font-black text-white mb-3 leading-tight">
                   SiagaKita: Integrated Tourism Emergency Response &amp; Real-Time Tracking Ecosystem
                 </h3>
@@ -50,11 +50,11 @@
                   <div>
                     <div class="text-xs font-mono text-white/40 uppercase tracking-widest mb-2">Abstract</div>
                     <p class="text-white/70 text-sm leading-relaxed">
-                      Penelitian ini mempresentasikan SiagaKita, sebuah ekosistem respons darurat pariwisata yang mengintegrasikan 
-                      pelaporan insiden real-time, pelacakan GPS, dan koordinasi multi-agensi. Sistem ini dirancang untuk menjembatani 
-                      kesenjangan komunikasi antara wisatawan, relawan, BASARNAS, dan BPBD. Menggunakan arsitektur Flutter (mobile), 
-                      Django REST (backend), dan WebSocket untuk komunikasi real-time, SiagaKita menghadirkan SOS 10-detik, 
-                      Biometric Ledger untuk identifikasi korban, dan dashboard taktis untuk agen darurat.
+                      This paper presents SiagaKita, an integrated tourism emergency response ecosystem that unifies real-time
+                      incident reporting, GPS tracking, and multi-agency coordination. Designed to bridge the communication gap
+                      between tourists, volunteers, BASARNAS, and BPBD, SiagaKita is built on Flutter (mobile), Django REST
+                      (backend), and WebSocket for real-time data. Key features include a 10-second SOS trigger, a Biometric
+                      Ledger for victim identification, and a tactical dashboard for emergency agencies.
                     </p>
                   </div>
 
@@ -93,7 +93,7 @@
                   <div class="space-y-3">
                     <div v-for="tech in techStack" :key="tech.name" class="flex items-center justify-between">
                       <div class="flex items-center gap-2">
-                        <span class="text-lg">{{ tech.icon }}</span>
+                        <span class="w-2.5 h-2.5 rounded-full flex-shrink-0" :style="{ background: tech.color }"></span>
                         <span class="text-sm text-white/70">{{ tech.name }}</span>
                       </div>
                       <span class="text-xs font-mono px-2 py-0.5 rounded-full" :style="{ background: `${tech.color}20`, color: tech.color }">{{ tech.role }}</span>
@@ -107,9 +107,9 @@
           <!-- HKI Tab -->
           <div v-else-if="activeTab === 'hki'" key="hki" id="hki" class="scroll-mt-24">
             <div class="glass-card p-8 max-w-4xl mx-auto">
-              <div class="pill-badge mb-6">🏅 HAK KEKAYAAN INTELEKTUAL</div>
-              <h3 class="text-2xl font-black text-white mb-2">Sertifikat HKI</h3>
-              <p class="text-white/50 text-sm mb-8">Hak Cipta Jenis Program Komputer — Republik Indonesia</p>
+              <div class="pill-badge mb-6">INTELLECTUAL PROPERTY CERTIFICATE</div>
+              <h3 class="text-2xl font-black text-white mb-2">HKI Certificate</h3>
+              <p class="text-white/50 text-sm mb-8">Copyright of Computer Program — Republic of Indonesia</p>
 
               <!-- Certificate card mockup -->
               <div class="relative rounded-2xl overflow-hidden border border-orange-500/30 bg-gradient-to-br from-navy-700 to-navy-900 p-1 mb-8">
@@ -122,7 +122,7 @@
                     </div>
                     <div class="text-right">
                       <div class="text-xs font-mono text-orange-400/70">EC00 2025</div>
-                      <div class="text-xs font-mono text-white/30">No. Pencatatan</div>
+                      <div class="text-xs font-mono text-white/30">Registration No.</div>
                     </div>
                   </div>
 
@@ -139,11 +139,11 @@
                   </div>
 
                   <div class="flex items-center justify-center gap-4 pt-4 border-t border-white/10">
-                    <div class="w-16 h-16 rounded-full border-2 border-orange-500/40 flex items-center justify-center text-3xl animate-float">
-                      🔏
+                    <div class="w-16 h-16 rounded-full border-2 border-orange-500/40 flex items-center justify-center animate-float">
+                      <svg class="w-7 h-7 text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
                     </div>
                     <div>
-                      <div class="text-sm font-bold text-white">Terdaftar & Sah</div>
+                      <div class="text-sm font-bold text-white">Registered &amp; Valid</div>
                       <div class="text-xs font-mono text-white/40">Digital Certificate • 2025</div>
                     </div>
                   </div>
@@ -159,7 +159,7 @@
                   <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
                   </svg>
-                  Unduh Sertifikat HKI
+                  Download HKI Certificate
                 </a>
               </div>
             </div>
@@ -168,7 +168,7 @@
           <!-- Poster Tab -->
           <div v-else-if="activeTab === 'poster'" key="poster" id="poster" class="scroll-mt-24">
             <div class="max-w-4xl mx-auto">
-              <div class="pill-badge mb-6 mx-auto w-fit">🖼️ RESEARCH POSTER</div>
+              <div class="pill-badge mb-6 mx-auto w-fit">RESEARCH POSTER</div>
 
               <!-- Poster frame -->
               <div class="relative rounded-2xl overflow-hidden border border-orange-500/30 shadow-2xl shadow-orange-500/10 cursor-zoom-in" @click="posterZoomed = !posterZoomed">
@@ -186,8 +186,8 @@
 
                   <!-- Feature grid -->
                   <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-                    <div v-for="feat in posterFeatures" :key="feat.title" class="glass rounded-xl p-4 text-center">
-                      <div class="text-3xl mb-2">{{ feat.icon }}</div>
+                    <div v-for="(feat, fi) in posterFeatures" :key="feat.title" class="glass rounded-xl p-4 text-center">
+                      <div class="w-8 h-8 rounded-lg bg-orange-500/20 border border-orange-500/40 flex items-center justify-center mx-auto mb-2 text-xs font-mono font-bold text-orange-400">{{ String(fi + 1).padStart(2, '0') }}</div>
                       <div class="text-xs font-bold text-white">{{ feat.title }}</div>
                       <div class="text-[10px] text-white/40 mt-1">{{ feat.desc }}</div>
                     </div>
@@ -210,7 +210,7 @@
                 <!-- Zoom overlay hint -->
                 <div class="absolute inset-0 bg-black/0 hover:bg-black/20 transition-all duration-300 flex items-center justify-center">
                   <div class="opacity-0 hover:opacity-100 transition-opacity duration-300 glass px-4 py-2 rounded-xl text-sm text-white">
-                    {{ posterZoomed ? 'Klik untuk zoom out' : 'Klik untuk zoom in' }}
+                    {{ posterZoomed ? 'Click to zoom out' : 'Click to zoom in' }}
                   </div>
                 </div>
               </div>
@@ -219,7 +219,7 @@
               <Transition name="zoom-fade">
                 <div v-if="posterZoomed" class="fixed inset-0 z-50 bg-black/90 backdrop-blur-sm flex items-center justify-center p-4" @click="posterZoomed = false">
                   <div class="max-w-4xl w-full glass-card p-4">
-                    <div class="text-center text-white/50 text-sm mb-4">Klik di luar untuk menutup</div>
+                    <div class="text-center text-white/50 text-sm mb-4">Click outside to close</div>
                     <div class="bg-gradient-to-br from-navy-900 to-navy-800 p-8 rounded-xl">
                       <p class="text-center text-white/60 text-sm">Full poster visualization would appear here. Replace with actual poster image.</p>
                     </div>
@@ -241,7 +241,7 @@
           <!-- Install Tab -->
           <div v-else-if="activeTab === 'install'" key="install" id="install" class="scroll-mt-24">
             <div class="max-w-3xl mx-auto text-center">
-              <div class="pill-badge mb-8 mx-auto w-fit">📱 ANDROID APPLICATION</div>
+              <div class="pill-badge mb-8 mx-auto w-fit">ANDROID APPLICATION</div>
 
               <!-- Phone mockup area -->
               <div class="relative inline-block mb-12 animate-float">
@@ -256,7 +256,7 @@
 
               <h3 class="text-3xl font-black text-white mb-3">SiagaKita for Android</h3>
               <p class="text-white/50 mb-8 max-w-md mx-auto">
-                Unduh aplikasi SiagaKita untuk perangkat Android. Tersedia sebagai APK Release yang siap diinstal.
+                Download SiagaKita for your Android device. Available as a Release APK, ready to install.
               </p>
 
               <!-- App info grid -->
@@ -274,7 +274,7 @@
                 class="btn-download inline-flex items-center gap-3 text-lg"
               >
                 <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.7 9.05 7.4c1.31.07 2.2.74 2.96.8 1.12-.24 2.19-.93 3.39-.84 1.44.12 2.53.72 3.24 1.8-2.96 1.77-2.52 5.66.42 6.72-.5 1.35-1.16 2.69-2.01 4.4zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z"/>
+                  <path d="M17.523 15.341a.998.998 0 01-.999-.999.998.998 0 01.999-.999.998.998 0 01.999.999.998.998 0 01-.999.999m-11.046 0a.998.998 0 01-.999-.999.998.998 0 01.999-.999.998.998 0 01.999.999.998.998 0 01-.999.999m11.405-6.02l1.997-3.459a.416.416 0 00-.152-.568.416.416 0 00-.568.152l-2.022 3.503A11.306 11.306 0 0012 7.851a11.306 11.306 0 00-5.137 1.099L4.841 5.447a.416.416 0 00-.568-.152.416.416 0 00-.152.568l1.997 3.459C2.689 11.187.343 14.659 0 18.761h24c-.344-4.102-2.689-7.574-6.118-9.44"/>
                 </svg>
                 Download APK — Android
               </a>
@@ -283,7 +283,7 @@
 
               <!-- Install steps -->
               <div class="mt-12 text-left glass-card p-6 max-w-md mx-auto">
-                <div class="text-xs font-mono text-white/40 uppercase tracking-widest mb-4">Cara Install</div>
+                <div class="text-xs font-mono text-white/40 uppercase tracking-widest mb-4">Installation Guide</div>
                 <div class="space-y-3">
                   <div v-for="(step, i) in installSteps" :key="i" class="flex items-start gap-3">
                     <div class="w-6 h-6 rounded-full bg-orange-500/20 border border-orange-500/40 flex items-center justify-center flex-shrink-0 text-xs font-mono text-orange-400">{{ i + 1 }}</div>
@@ -312,10 +312,22 @@ const activeTab = ref('paper')
 const posterZoomed = ref(false)
 
 const tabs = [
-  { id: 'paper', label: 'Submit Paper', icon: '📄' },
-  { id: 'hki', label: 'HKI Certificate', icon: '🏅' },
-  { id: 'poster', label: 'Poster', icon: '🖼️' },
-  { id: 'install', label: 'Install App', icon: '📱' },
+  {
+    id: 'paper', label: 'Submit Paper',
+    iconSvg: '<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>',
+  },
+  {
+    id: 'hki', label: 'HKI Certificate',
+    iconSvg: '<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/></svg>',
+  },
+  {
+    id: 'poster', label: 'Poster',
+    iconSvg: '<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>',
+  },
+  {
+    id: 'install', label: 'Install App',
+    iconSvg: '<svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M17.523 15.341a.998.998 0 01-.999-.999.998.998 0 01.999-.999.998.998 0 01.999.999.998.998 0 01-.999.999m-11.046 0a.998.998 0 01-.999-.999.998.998 0 01.999-.999.998.998 0 01.999.999.998.998 0 01-.999.999m11.405-6.02l1.997-3.459a.416.416 0 00-.152-.568.416.416 0 00-.568.152l-2.022 3.503A11.306 11.306 0 0012 7.851a11.306 11.306 0 00-5.137 1.099L4.841 5.447a.416.416 0 00-.568-.152.416.416 0 00-.152.568l1.997 3.459C2.689 11.187.343 14.659 0 18.761h24c-.344-4.102-2.689-7.574-6.118-9.44"/></svg>',
+  },
 ]
 
 const setTab = (id) => {
@@ -326,7 +338,7 @@ const setTab = (id) => {
 }
 
 const paperMeta = [
-  { label: 'Authors', value: 'Tim SiagaKita, 2025' },
+  { label: 'Authors', value: 'SiagaKita Team, 2025' },
   { label: 'Category', value: 'Applied Technology' },
   { label: 'Platform', value: 'Flutter + Django' },
   { label: 'Status', value: 'Published' },
@@ -338,27 +350,27 @@ const keywords = [
 ]
 
 const techStack = [
-  { name: 'Flutter', icon: '📱', role: 'Mobile', color: '#42A5F5' },
-  { name: 'Django', icon: '🐍', role: 'Backend', color: '#66BB6A' },
-  { name: 'PostgreSQL', icon: '🐘', role: 'Database', color: '#AB47BC' },
-  { name: 'WebSocket', icon: '⚡', role: 'Realtime', color: '#FF7043' },
-  { name: 'Firebase', icon: '🔥', role: 'Notifications', color: '#FFA726' },
+  { name: 'Flutter', role: 'Mobile', color: '#42A5F5' },
+  { name: 'Django', role: 'Backend', color: '#66BB6A' },
+  { name: 'PostgreSQL', role: 'Database', color: '#AB47BC' },
+  { name: 'WebSocket', role: 'Realtime', color: '#FF7043' },
+  { name: 'Firebase', role: 'Notifications', color: '#FFA726' },
 ]
 
 const hkiFields = [
-  { label: 'Nama Program', value: 'SiagaKita — Integrated Emergency Response System' },
-  { label: 'Jenis', value: 'Program Komputer (Software Application)' },
-  { label: 'Tahun Pertama Kali Diumumkan', value: '2025' },
-  { label: 'Pencipta', value: 'Tim SiagaKita' },
-  { label: 'Pemegang Hak Cipta', value: 'Tim SiagaKita' },
-  { label: 'Status', value: 'Terdaftar & Berlaku' },
+  { label: 'Program Name', value: 'SiagaKita — Integrated Emergency Response System' },
+  { label: 'Type', value: 'Computer Program (Software Application)' },
+  { label: 'Year First Published', value: '2025' },
+  { label: 'Creator', value: 'SiagaKita Team' },
+  { label: 'Copyright Holder', value: 'SiagaKita Team' },
+  { label: 'Status', value: 'Registered &amp; Active' },
 ]
 
 const posterFeatures = [
-  { icon: '🆘', title: 'SOS 10 Detik', desc: '1-tap emergency' },
-  { icon: '🧬', title: 'Biometric Ledger', desc: 'Victim ID system' },
-  { icon: '📍', title: 'GPS Tracking', desc: 'Real-time location' },
-  { icon: '📡', title: 'Multi-Agency', desc: 'Coordinated response' },
+  { title: 'SOS in 10 Seconds', desc: '1-tap emergency trigger' },
+  { title: 'Biometric Ledger', desc: 'Victim ID system' },
+  { title: 'GPS Tracking', desc: 'Real-time location' },
+  { title: 'Multi-Agency', desc: 'Coordinated response' },
 ]
 
 const archLayers = ['Flutter App', 'Django API', 'WebSocket', 'PostgreSQL', 'Firebase']
@@ -371,11 +383,11 @@ const appInfo = [
 ]
 
 const installSteps = [
-  'Unduh file APK dari tombol di atas',
-  'Buka Pengaturan → Keamanan → Aktifkan "Sumber Tidak Dikenal"',
-  'Temukan file APK di folder Downloads',
-  'Ketuk file APK dan ikuti petunjuk instalasi',
-  'Buka SiagaKita dan daftarkan akun Anda',
+  'Download the APK file using the button above',
+  'Open Settings → Security → Enable "Unknown Sources"',
+  'Locate the APK file in your Downloads folder',
+  'Tap the APK file and follow the installation prompts',
+  'Open SiagaKita and create your account',
 ]
 
 onMounted(() => {
