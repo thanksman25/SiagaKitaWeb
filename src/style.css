@@ -1,0 +1,234 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-navy-900 text-white font-sans overflow-x-hidden;
+    background-color: #0A192F;
+  }
+
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #0A192F;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #FF5722;
+    border-radius: 3px;
+  }
+}
+
+@layer components {
+  /* Glassmorphism */
+  .glass {
+    @apply backdrop-blur-md border border-white/10;
+    background: rgba(10, 25, 47, 0.7);
+  }
+
+  .glass-card {
+    @apply backdrop-blur-sm border border-white/10 rounded-2xl;
+    background: rgba(13, 33, 55, 0.8);
+  }
+
+  /* HUD Border */
+  .hud-border {
+    position: relative;
+  }
+
+  .hud-border::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 20px; height: 20px;
+    border-top: 2px solid #FF5722;
+    border-left: 2px solid #FF5722;
+  }
+
+  .hud-border::after {
+    content: '';
+    position: absolute;
+    bottom: 0; right: 0;
+    width: 20px; height: 20px;
+    border-bottom: 2px solid #FF5722;
+    border-right: 2px solid #FF5722;
+  }
+
+  /* Glow text */
+  .text-glow {
+    text-shadow: 0 0 20px rgba(255, 87, 34, 0.6), 0 0 40px rgba(255, 87, 34, 0.3);
+  }
+
+  /* Orange gradient text */
+  .text-gradient {
+    background: linear-gradient(135deg, #FF7043, #FF5722, #E64A19);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Scan line overlay */
+  .scan-overlay {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+  }
+
+  .scan-overlay::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, rgba(255, 87, 34, 0.3), transparent);
+    animation: scanLine 8s linear infinite;
+    top: 0;
+  }
+
+  /* Tactical grid */
+  .tactical-grid {
+    background-image: 
+      linear-gradient(rgba(255, 87, 34, 0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 87, 34, 0.05) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+
+  /* Pill badge */
+  .pill-badge {
+    @apply inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-mono font-medium;
+    background: rgba(255, 87, 34, 0.15);
+    border: 1px solid rgba(255, 87, 34, 0.3);
+    color: #FF7043;
+  }
+
+  /* Nav link */
+  .nav-link {
+    @apply relative px-1 py-1 text-sm font-medium text-white/70 transition-all duration-300;
+  }
+
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: #FF5722;
+    transition: width 0.3s ease;
+  }
+
+  .nav-link:hover {
+    @apply text-white;
+  }
+
+  .nav-link:hover::after,
+  .nav-link.active::after {
+    width: 100%;
+  }
+
+  .nav-link.active {
+    @apply text-orange-400;
+  }
+
+  /* Tab button */
+  .tab-btn {
+    @apply relative px-5 py-3 rounded-xl text-sm font-medium transition-all duration-300 text-white/60 hover:text-white;
+    border: 1px solid transparent;
+  }
+
+  .tab-btn.active {
+    @apply text-white;
+    background: rgba(255, 87, 34, 0.15);
+    border-color: rgba(255, 87, 34, 0.4);
+    color: #FF7043;
+  }
+
+  /* Download button glow */
+  .btn-download {
+    @apply relative overflow-hidden font-semibold px-8 py-4 rounded-2xl text-white transition-all duration-300;
+    background: linear-gradient(135deg, #FF5722, #E64A19);
+    animation: glowPulse 2s ease-in-out infinite;
+  }
+
+  .btn-download::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    transform: rotate(45deg);
+    transition: transform 0.6s;
+  }
+
+  .btn-download:hover::before {
+    transform: rotate(45deg) translateX(100%);
+  }
+
+  .btn-download:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 20px 40px rgba(255, 87, 34, 0.4);
+  }
+}
+
+@layer utilities {
+  .animation-delay-200 { animation-delay: 200ms; }
+  .animation-delay-400 { animation-delay: 400ms; }
+  .animation-delay-600 { animation-delay: 600ms; }
+
+  /* Fade-in animation */
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .fade-in-up {
+    animation: fadeInUp 0.8s ease forwards;
+  }
+
+  @keyframes glowPulse {
+    0%, 100% { box-shadow: 0 0 20px rgba(255, 87, 34, 0.4), 0 0 40px rgba(255, 87, 34, 0.2); }
+    50% { box-shadow: 0 0 30px rgba(255, 87, 34, 0.8), 0 0 60px rgba(255, 87, 34, 0.4); }
+  }
+
+  @keyframes scanLine {
+    0% { top: -2px; }
+    100% { top: 100%; }
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-12px); }
+  }
+
+  @keyframes ping-slow {
+    0% { transform: scale(1); opacity: 0.8; }
+    100% { transform: scale(2.5); opacity: 0; }
+  }
+
+  .animate-float {
+    animation: float 5s ease-in-out infinite;
+  }
+
+  .animate-ping-slow {
+    animation: ping-slow 2s ease-out infinite;
+  }
+}
