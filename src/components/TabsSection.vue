@@ -171,76 +171,77 @@
 
           <!-- Poster Tab -->
           <div v-else-if="activeTab === 'poster'" key="poster" id="poster" class="scroll-mt-24">
-            <div class="max-w-4xl mx-auto">
+            <div class="max-w-3xl mx-auto">
               <div class="pill-badge mb-6 mx-auto w-fit">RESEARCH POSTER</div>
 
-              <!-- Poster frame -->
-              <div class="relative rounded-2xl overflow-hidden border border-orange-500/30 shadow-2xl shadow-orange-500/10 cursor-zoom-in" @click="posterZoomed = !posterZoomed">
-                <!-- Poster content as styled div -->
-                <div class="bg-gradient-to-br from-navy-900 via-navy-800 to-[#1a0a00] p-8 md:p-12">
-                  <!-- Poster header -->
-                  <div class="text-center mb-8 border-b border-orange-500/30 pb-8">
-                    <div class="flex items-center justify-center gap-3 mb-4">
-                      <img src="/logo_siagakita_transparant.png" alt="Logo" class="w-12 h-12 object-contain" />
-                      <h2 class="text-3xl font-black text-white">SiagaKita</h2>
-                    </div>
-                    <p class="text-orange-400 font-semibold text-lg">Integrated Tourism Emergency Response</p>
-                    <p class="text-white/50 text-sm">& Real-Time Tracking Ecosystem</p>
-                  </div>
+              <!-- Poster image frame -->
+              <div
+                class="relative rounded-2xl overflow-hidden border border-orange-500/30 shadow-2xl shadow-orange-500/10 cursor-zoom-in group"
+                @click="posterZoomed = true"
+              >
+                <img
+                  src="/Poster_SiagaKita.png"
+                  alt="SiagaKita Research Poster"
+                  class="w-full h-auto block transition-transform duration-500 group-hover:scale-[1.02]"
+                />
 
-                  <!-- Feature grid -->
-                  <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-                    <div v-for="(feat, fi) in posterFeatures" :key="feat.title" class="glass rounded-xl p-4 text-center">
-                      <div class="w-8 h-8 rounded-lg bg-orange-500/20 border border-orange-500/40 flex items-center justify-center mx-auto mb-2 text-xs font-mono font-bold text-orange-400">{{ String(fi + 1).padStart(2, '0') }}</div>
-                      <div class="text-xs font-bold text-white">{{ feat.title }}</div>
-                      <div class="text-[10px] text-white/40 mt-1">{{ feat.desc }}</div>
-                    </div>
-                  </div>
-
-                  <!-- Architecture -->
-                  <div class="border border-white/10 rounded-xl p-6">
-                    <div class="text-xs font-mono text-white/40 uppercase tracking-widest mb-4 text-center">System Architecture</div>
-                    <div class="flex items-center justify-center gap-2 flex-wrap">
-                      <div v-for="(layer, i) in archLayers" :key="layer" class="flex items-center gap-2">
-                        <div class="px-3 py-1.5 rounded-lg text-xs font-mono font-semibold" :style="{ background: `${archColors[i]}20`, color: archColors[i], border: `1px solid ${archColors[i]}40` }">
-                          {{ layer }}
-                        </div>
-                        <span v-if="i < archLayers.length - 1" class="text-orange-500/40 text-xs">→</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <!-- Zoom overlay hint -->
-                <div class="absolute inset-0 bg-black/0 hover:bg-black/20 transition-all duration-300 flex items-center justify-center">
-                  <div class="opacity-0 hover:opacity-100 transition-opacity duration-300 glass px-4 py-2 rounded-xl text-sm text-white">
-                    {{ posterZoomed ? 'Click to zoom out' : 'Click to zoom in' }}
+                <!-- Hover overlay -->
+                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-all duration-300 flex items-center justify-center">
+                  <div class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 glass px-5 py-3 rounded-xl flex items-center gap-2 text-sm font-medium text-white">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/>
+                    </svg>
+                    Click to view full size
                   </div>
                 </div>
               </div>
 
-              <!-- Zoomed modal -->
+              <!-- Lightbox / Zoom modal -->
               <Transition name="zoom-fade">
-                <div v-if="posterZoomed" class="fixed inset-0 z-50 bg-black/90 backdrop-blur-sm flex items-center justify-center p-4" @click="posterZoomed = false">
-                  <div class="max-w-4xl w-full glass-card p-4">
-                    <div class="text-center text-white/50 text-sm mb-4">Click outside to close</div>
-                    <div class="bg-gradient-to-br from-navy-900 to-navy-800 p-8 rounded-xl">
-                      <p class="text-center text-white/60 text-sm">Full poster visualization would appear here. Replace with actual poster image.</p>
-                    </div>
+                <div
+                  v-if="posterZoomed"
+                  class="fixed inset-0 z-50 bg-black/95 backdrop-blur-sm flex items-start justify-center p-4 overflow-y-auto"
+                  @click.self="posterZoomed = false"
+                >
+                  <div class="relative max-w-5xl w-full my-4">
+                    <!-- Close button -->
+                    <button
+                      @click="posterZoomed = false"
+                      class="sticky top-2 float-right z-10 mb-2 w-9 h-9 rounded-full bg-white/10 hover:bg-orange-500/80 border border-white/20 flex items-center justify-center transition-all duration-200"
+                    >
+                      <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                      </svg>
+                    </button>
+
+                    <img
+                      src="/Poster_SiagaKita.png"
+                      alt="SiagaKita Research Poster — Full Size"
+                      class="w-full h-auto rounded-xl shadow-2xl"
+                    />
+
+                    <p class="text-center text-white/30 text-xs font-mono mt-3">Click outside or × to close</p>
                   </div>
                 </div>
               </Transition>
 
+              <!-- Download button -->
               <div class="flex justify-center mt-6">
-                <a href="#" id="poster-download-btn" class="inline-flex items-center gap-3 px-6 py-3 rounded-xl font-semibold text-sm border border-orange-500/40 text-orange-400 hover:bg-orange-500/10 transition-all duration-300">
+                <a
+                  href="/Poster_SiagaKita.png"
+                  download="Poster_SiagaKita.png"
+                  id="poster-download-btn"
+                  class="inline-flex items-center gap-3 px-6 py-3 rounded-xl font-semibold text-sm border border-orange-500/40 text-orange-400 hover:bg-orange-500/10 transition-all duration-300 hover:-translate-y-0.5"
+                >
                   <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
                   </svg>
-                  Download Poster (High-Res)
+                  Download Poster (High-Res PNG)
                 </a>
               </div>
             </div>
           </div>
+
 
           <!-- Install Tab -->
           <div v-else-if="activeTab === 'install'" key="install" id="install" class="scroll-mt-24">
