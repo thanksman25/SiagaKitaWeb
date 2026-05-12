@@ -36,60 +36,51 @@
           <!-- Paper Tab -->
           <div v-if="activeTab === 'paper'" key="paper" id="paper" class="scroll-mt-24">
             <div class="grid grid-cols-1 lg:grid-cols-5 gap-8">
-              <!-- Main card -->
-              <div class="lg:col-span-3 glass-card p-8 hud-border group">
-                <div class="pill-badge mb-6">RESEARCH PAPER</div>
-                <h3 class="text-2xl font-black text-white mb-3 leading-tight">
+              <!-- PDF Viewer -->
+              <div class="lg:col-span-3 flex flex-col gap-4">
+                <div class="pill-badge w-fit">RESEARCH PAPER</div>
+                <h3 class="text-xl font-black text-white leading-tight">
                   SiagaKita: Integrated Tourism Emergency Response &amp; Real-Time Tracking Ecosystem
                 </h3>
-                <p class="text-sm font-mono text-orange-400/70 mb-6">
-                  Journal of Applied Technology and Innovation • 2025
-                </p>
-
-                <div class="space-y-4 mb-8">
-                  <div>
-                    <div class="text-xs font-mono text-white/40 uppercase tracking-widest mb-2">Abstract</div>
-                    <p class="text-white/70 text-sm leading-relaxed">
-                      This paper presents SiagaKita, an integrated tourism emergency response ecosystem that unifies real-time
-                      incident reporting, GPS tracking, and multi-agency coordination. Designed to bridge the communication gap
-                      between tourists, volunteers, BASARNAS, and BPBD, SiagaKita is built on Flutter (mobile), Golang
-                      (backend), and WebSocket for real-time data. Key features include a 10-second SOS trigger, a Biometric
-                      Ledger for victim identification, and a tactical dashboard for emergency agencies.
-                    </p>
-                  </div>
-
-                  <div class="grid grid-cols-2 gap-4 pt-2">
-                    <div v-for="meta in paperMeta" :key="meta.label" class="bg-white/5 rounded-xl p-3">
-                      <div class="text-[10px] font-mono text-white/40 uppercase tracking-widest mb-1">{{ meta.label }}</div>
-                      <div class="text-sm font-semibold" :class="meta.pending ? 'text-yellow-400' : 'text-white'">{{ meta.value }}</div>
-                    </div>
-                  </div>
+                <!-- Status badge -->
+                <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-mono font-semibold w-fit" style="background:rgba(234,179,8,0.12);border:1px solid rgba(234,179,8,0.3);color:#FBBF24">
+                  <span class="w-1.5 h-1.5 rounded-full bg-yellow-400 animate-pulse"></span>
+                  UNDER EDITORIAL REVIEW
                 </div>
-
-                <!-- Pending state -->
-                <div class="rounded-2xl border border-yellow-500/30 bg-yellow-500/5 p-5 flex items-start gap-4">
-                  <div class="w-10 h-10 rounded-xl bg-yellow-500/15 border border-yellow-500/30 flex items-center justify-center flex-shrink-0 mt-0.5">
-                    <svg class="w-5 h-5 text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                    </svg>
-                  </div>
-                  <div>
-                    <div class="text-sm font-bold text-yellow-300 mb-1">Paper Under Review</div>
-                    <p class="text-xs text-white/50 leading-relaxed">
-                      The full research paper is currently under editorial review. The download link will be available once the publication process is complete.
-                    </p>
-                    <div class="mt-3 flex items-center gap-2">
-                      <div class="flex gap-1">
-                        <span v-for="n in 5" :key="n" class="w-5 h-1.5 rounded-full" :class="n <= 3 ? 'bg-yellow-400' : 'bg-white/10'"></span>
-                      </div>
-                      <span class="text-[10px] font-mono text-yellow-400/70">3 / 5 stages complete</span>
-                    </div>
-                  </div>
+                <!-- Embedded PDF -->
+                <div class="rounded-2xl overflow-hidden border border-orange-500/20 shadow-xl shadow-black/40" style="height:680px">
+                  <iframe
+                    src="/SiagaKita_JSIGN_Paper_Fix%20ini.pdf#toolbar=1&navpanes=0&scrollbar=1"
+                    class="w-full h-full"
+                    type="application/pdf"
+                    title="SiagaKita Research Paper"
+                  ></iframe>
                 </div>
+                <!-- Download -->
+                <a
+                  href="/SiagaKita_JSIGN_Paper_Fix%20ini.pdf"
+                  download="SiagaKita_Paper.pdf"
+                  id="paper-download-btn"
+                  class="inline-flex items-center gap-3 px-5 py-2.5 rounded-xl font-semibold text-sm text-white w-fit transition-all duration-300 hover:shadow-lg hover:shadow-orange-500/30 hover:-translate-y-0.5"
+                  style="background:linear-gradient(135deg,#FF5722,#E64A19)"
+                >
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+                  Download Full Paper (PDF)
+                </a>
               </div>
 
-              <!-- Keywords & tech stack sidebar -->
+              <!-- Sidebar -->
               <div class="lg:col-span-2 space-y-6">
+                <div class="glass-card p-6">
+                  <div class="text-xs font-mono text-white/40 uppercase tracking-widest mb-4">Paper Info</div>
+                  <div class="space-y-3">
+                    <div v-for="meta in paperMeta" :key="meta.label" class="flex flex-col gap-0.5">
+                      <div class="text-[10px] font-mono text-white/30 uppercase tracking-widest">{{ meta.label }}</div>
+                      <div class="text-sm font-semibold" :class="meta.pending ? 'text-yellow-400' : 'text-white/80'">{{ meta.value }}</div>
+                    </div>
+                  </div>
+                </div>
+
                 <div class="glass-card p-6">
                   <div class="text-xs font-mono text-white/40 uppercase tracking-widest mb-4">Keywords</div>
                   <div class="flex flex-wrap gap-2">
@@ -115,55 +106,64 @@
 
           <!-- HKI Tab -->
           <div v-else-if="activeTab === 'hki'" key="hki" id="hki" class="scroll-mt-24">
-            <div class="glass-card p-8 max-w-4xl mx-auto">
-              <div class="pill-badge mb-6">INTELLECTUAL PROPERTY CERTIFICATE</div>
-              <h3 class="text-2xl font-black text-white mb-2">HKI Certificate</h3>
-              <p class="text-white/50 text-sm mb-8">Copyright of Computer Program — Republic of Indonesia</p>
-
-              <!-- Pending state hero -->
-              <div class="relative rounded-2xl overflow-hidden border border-yellow-500/20 bg-gradient-to-br from-yellow-500/5 to-navy-900/80 p-12 mb-8 text-center">
-                <!-- Animated ring -->
-                <div class="relative mx-auto w-28 h-28 mb-8">
-                  <div class="absolute inset-0 rounded-full border-2 border-yellow-500/20 animate-ping-slow" style="animation-duration: 3s;"></div>
-                  <div class="absolute inset-2 rounded-full border border-yellow-500/10 animate-ping-slow" style="animation-duration: 3s; animation-delay: 1s;"></div>
-                  <div class="w-28 h-28 rounded-full border-2 border-dashed border-yellow-500/40 flex items-center justify-center">
-                    <svg class="w-12 h-12 text-yellow-400/70" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/>
-                    </svg>
-                  </div>
-                </div>
-
-                <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-mono font-semibold mb-4" style="background: rgba(234,179,8,0.15); border: 1px solid rgba(234,179,8,0.3); color: #FBBF24;">
+            <div class="grid grid-cols-1 lg:grid-cols-5 gap-8">
+              <!-- PDF Viewer -->
+              <div class="lg:col-span-3 flex flex-col gap-4">
+                <div class="pill-badge w-fit">INTELLECTUAL PROPERTY CERTIFICATE</div>
+                <h3 class="text-xl font-black text-white leading-tight">HKI Certificate</h3>
+                <p class="text-white/50 text-sm">Copyright of Computer Program — Republic of Indonesia</p>
+                <!-- Status badge -->
+                <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-mono font-semibold w-fit" style="background:rgba(234,179,8,0.12);border:1px solid rgba(234,179,8,0.3);color:#FBBF24">
                   <span class="w-1.5 h-1.5 rounded-full bg-yellow-400 animate-pulse"></span>
                   AWAITING ISSUANCE
                 </div>
-
-                <h4 class="text-xl font-black text-white mb-3">Certificate Pending</h4>
-                <p class="text-white/50 text-sm max-w-md mx-auto leading-relaxed">
-                  The HKI intellectual property certificate for SiagaKita has been submitted to the Ministry of Law and Human Rights of the Republic of Indonesia and is currently awaiting official issuance.
-                </p>
-
-                <!-- Progress steps -->
-                <div class="mt-8 flex items-center justify-center gap-0">
-                  <div v-for="(step, i) in hkiSteps" :key="step.label" class="flex items-center">
-                    <div class="flex flex-col items-center gap-1.5">
-                      <div class="w-7 h-7 rounded-full flex items-center justify-center text-xs font-mono font-bold transition-all"
-                        :class="step.done ? 'bg-yellow-500 text-navy-900' : 'border border-white/20 text-white/30'">
-                        <svg v-if="step.done" class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
-                        <span v-else>{{ i + 1 }}</span>
-                      </div>
-                      <span class="text-[9px] font-mono uppercase tracking-wide" :class="step.done ? 'text-yellow-400' : 'text-white/20'">{{ step.label }}</span>
-                    </div>
-                    <div v-if="i < hkiSteps.length - 1" class="w-10 h-px mb-5" :class="step.done ? 'bg-yellow-500/40' : 'bg-white/10'"></div>
-                  </div>
+                <!-- Embedded PDF -->
+                <div class="rounded-2xl overflow-hidden border border-orange-500/20 shadow-xl shadow-black/40" style="height:680px">
+                  <iframe
+                    src="/HKI%20SiagaKita.pdf#toolbar=1&navpanes=0&scrollbar=1"
+                    class="w-full h-full"
+                    type="application/pdf"
+                    title="SiagaKita HKI Certificate"
+                  ></iframe>
                 </div>
+                <!-- Download -->
+                <a
+                  href="/HKI%20SiagaKita.pdf"
+                  download="HKI_SiagaKita.pdf"
+                  id="hki-download-btn"
+                  class="inline-flex items-center gap-3 px-5 py-2.5 rounded-xl font-semibold text-sm border border-orange-500/40 text-orange-400 hover:bg-orange-500/10 transition-all duration-300 hover:-translate-y-0.5 w-fit"
+                >
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+                  Download HKI Certificate (PDF)
+                </a>
               </div>
 
-              <!-- Info fields -->
-              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div v-for="field in hkiFields" :key="field.label" class="bg-white/5 rounded-xl p-4 border border-white/5">
-                  <div class="text-[10px] font-mono text-white/30 uppercase tracking-widest mb-1">{{ field.label }}</div>
-                  <div class="text-sm text-white/70">{{ field.value }}</div>
+              <!-- Sidebar -->
+              <div class="lg:col-span-2 space-y-6">
+                <!-- Progress steps -->
+                <div class="glass-card p-6">
+                  <div class="text-xs font-mono text-white/40 uppercase tracking-widest mb-5">Submission Progress</div>
+                  <div class="space-y-3">
+                    <div v-for="(step, i) in hkiSteps" :key="step.label" class="flex items-center gap-3">
+                      <div class="w-6 h-6 rounded-full flex items-center justify-center text-xs font-mono font-bold flex-shrink-0 transition-all"
+                        :class="step.done ? 'bg-yellow-500 text-[#0A192F]' : 'border border-white/20 text-white/30'">
+                        <svg v-if="step.done" class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
+                        <span v-else class="text-[10px]">{{ i + 1 }}</span>
+                      </div>
+                      <span class="text-sm font-mono" :class="step.done ? 'text-yellow-400' : 'text-white/25'">{{ step.label }}</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Info fields -->
+                <div class="glass-card p-6">
+                  <div class="text-xs font-mono text-white/40 uppercase tracking-widest mb-4">Certificate Info</div>
+                  <div class="space-y-3">
+                    <div v-for="field in hkiFields" :key="field.label" class="flex flex-col gap-0.5">
+                      <div class="text-[10px] font-mono text-white/30 uppercase tracking-widest">{{ field.label }}</div>
+                      <div class="text-sm text-white/70">{{ field.value }}</div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
