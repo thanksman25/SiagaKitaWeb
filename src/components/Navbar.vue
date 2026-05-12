@@ -42,20 +42,26 @@
 
       <!-- Right side: Lang toggle + CTA -->
       <div class="hidden lg:flex items-center gap-3">
-        <!-- Language toggle -->
+        <!-- Language toggle switch -->
         <button
           id="lang-toggle"
           @click="toggleLang"
-          class="flex items-center gap-1 px-3 py-1.5 rounded-lg border text-xs font-mono font-bold tracking-widest transition-all duration-200 hover:-translate-y-0.5"
-          :class="lang === 'en'
-            ? 'border-orange-500/40 text-orange-400 bg-orange-500/10 hover:bg-orange-500/20'
-            : 'border-blue-400/40 text-blue-300 bg-blue-500/10 hover:bg-blue-500/20'"
+          aria-label="Toggle language"
+          class="relative flex items-center w-[72px] h-8 rounded-full p-0.5 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-orange-500/40"
+          :style="lang === 'en'
+            ? 'background: rgba(255,87,34,0.15); border: 1px solid rgba(255,87,34,0.35);'
+            : 'background: rgba(59,130,246,0.15); border: 1px solid rgba(59,130,246,0.35);'"
         >
-          <span>{{ lang === 'en' ? '🇺🇸' : '🇮🇩' }}</span>
-          <span>{{ lang === 'en' ? 'EN' : 'ID' }}</span>
-          <svg class="w-3 h-3 opacity-60" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 9l4-4 4 4m0 6l-4 4-4-4"/>
-          </svg>
+          <!-- Sliding pill -->
+          <span
+            class="absolute top-0.5 h-7 w-8 rounded-full shadow-md transition-all duration-300 ease-in-out flex items-center justify-center text-[10px] font-black tracking-wider text-white"
+            :class="lang === 'en' ? 'left-0.5 bg-orange-500' : 'left-[calc(100%-2.1rem)] bg-blue-500'"
+          >
+            {{ lang === 'en' ? 'EN' : 'ID' }}
+          </span>
+          <!-- Labels -->
+          <span class="w-1/2 text-center text-[10px] font-bold z-10 transition-colors duration-300" :class="lang === 'en' ? 'text-transparent' : 'text-blue-300/60'">EN</span>
+          <span class="w-1/2 text-center text-[10px] font-bold z-10 transition-colors duration-300" :class="lang === 'id' ? 'text-transparent' : 'text-orange-400/60'">ID</span>
         </button>
 
         <!-- CTA -->
@@ -104,14 +110,27 @@
         >
           {{ t(`nav.${item.key}`) }}
         </a>
-        <!-- Mobile lang toggle -->
-        <button
-          @click="toggleLang"
-          class="flex items-center gap-2 text-sm font-mono py-2 border-b border-white/5 transition-colors"
-          :class="lang === 'en' ? 'text-orange-400' : 'text-blue-300'"
-        >
-          <span>{{ lang === 'en' ? '🇺🇸 EN → Switch to ID' : '🇮🇩 ID → Ganti ke EN' }}</span>
-        </button>
+        <!-- Mobile lang toggle switch -->
+        <div class="flex items-center justify-between py-2 border-b border-white/5">
+          <span class="text-xs font-mono text-white/40 uppercase tracking-widest">Language</span>
+          <button
+            @click="toggleLang"
+            aria-label="Toggle language"
+            class="relative flex items-center w-[72px] h-8 rounded-full p-0.5 transition-all duration-300 focus:outline-none"
+            :style="lang === 'en'
+              ? 'background: rgba(255,87,34,0.15); border: 1px solid rgba(255,87,34,0.35);'
+              : 'background: rgba(59,130,246,0.15); border: 1px solid rgba(59,130,246,0.35);'"
+          >
+            <span
+              class="absolute top-0.5 h-7 w-8 rounded-full shadow-md transition-all duration-300 ease-in-out flex items-center justify-center text-[10px] font-black text-white"
+              :class="lang === 'en' ? 'left-0.5 bg-orange-500' : 'left-[calc(100%-2.1rem)] bg-blue-500'"
+            >
+              {{ lang === 'en' ? 'EN' : 'ID' }}
+            </span>
+            <span class="w-1/2 text-center text-[10px] font-bold z-10" :class="lang === 'en' ? 'text-transparent' : 'text-blue-300/60'">EN</span>
+            <span class="w-1/2 text-center text-[10px] font-bold z-10" :class="lang === 'id' ? 'text-transparent' : 'text-orange-400/60'">ID</span>
+          </button>
+        </div>
         <a
           href="https://github.com/thanksman25/SiagaKitaWeb/releases/download/V1.0/SiagaKita.apk"
           download="SiagaKita.apk"
