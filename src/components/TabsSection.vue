@@ -306,7 +306,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, onUnmounted } from 'vue'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
@@ -336,11 +336,21 @@ const tabs = [
   },
 ]
 
+const TAB_IDS = ['paper', 'hki', 'poster', 'install']
+
+const activateFromHash = () => {
+  const hash = window.location.hash.replace('#', '')
+  if (TAB_IDS.includes(hash)) {
+    activeTab.value = hash
+    // Scroll the tabs section into view
+    const section = document.getElementById('tabs')
+    if (section) section.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  }
+}
+
 const setTab = (id) => {
   activeTab.value = id
-  // Scroll to section if needed
-  const el = document.getElementById(id)
-  if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  history.replaceState(null, '', `#${id}`)
 }
 
 const paperMeta = [
@@ -405,6 +415,10 @@ const installSteps = [
 ]
 
 onMounted(() => {
+  // Activate tab from URL hash on page load
+  activateFromHash()
+  window.addEventListener('hashchange', activateFromHash)
+
   ScrollTrigger.create({
     trigger: headerRef.value,
     start: 'top 85%',
@@ -419,6 +433,10 @@ onMounted(() => {
       gsap.to(tabsRef.value, { opacity: 1, y: 0, duration: 0.5, ease: 'power3.out', delay: 0.2 })
     },
   })
+})
+
+onUnmounted(() => {
+  window.removeEventListener('hashchange', activateFromHash)
 })
 </script>
 

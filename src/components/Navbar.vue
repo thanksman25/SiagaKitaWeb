@@ -34,7 +34,7 @@
           :id="`nav-${item.id}`"
           class="nav-link"
           :class="{ active: activeSection === item.id }"
-          @click="activeSection = item.id"
+          @click.prevent="handleNavClick(item)"
         >
           {{ item.label }}
         </a>
@@ -81,7 +81,7 @@
           :href="item.href"
           :id="`nav-mobile-${item.id}`"
           class="text-sm font-medium text-white/70 hover:text-orange-400 transition-colors py-2 border-b border-white/5"
-          @click="mobileOpen = false"
+          @click.prevent="handleNavClick(item); mobileOpen = false"
         >
           {{ item.label }}
         </a>
@@ -108,13 +108,25 @@ const activeSection = ref('home')
 const navRef = ref(null)
 
 const navItems = [
-  { id: 'home', label: 'Home', href: '#home' },
-  { id: 'about', label: 'Documentation', href: '#about' },
-  { id: 'paper', label: 'Submit Paper', href: '#paper' },
-  { id: 'hki', label: 'HKI Certificate', href: '#hki' },
-  { id: 'poster', label: 'Poster', href: '#poster' },
-  { id: 'install', label: 'Android APK', href: '#install' },
+  { id: 'home',    label: 'Home',            href: '#home',    tabId: null },
+  { id: 'about',   label: 'Documentation',   href: '#about',   tabId: null },
+  { id: 'paper',   label: 'Submit Paper',    href: '#paper',   tabId: 'paper' },
+  { id: 'hki',     label: 'HKI Certificate', href: '#hki',     tabId: 'hki' },
+  { id: 'poster',  label: 'Poster',          href: '#poster',  tabId: 'poster' },
+  { id: 'install', label: 'Android APK',     href: '#install', tabId: 'install' },
 ]
+
+const handleNavClick = (item) => {
+  activeSection.value = item.id
+  if (item.tabId) {
+    // Set hash so TabsSection picks it up
+    window.location.hash = item.tabId
+  } else {
+    // Normal anchor scroll
+    const el = document.getElementById(item.id)
+    if (el) el.scrollIntoView({ behavior: 'smooth' })
+  }
+}
 
 const handleScroll = () => {
   scrolled.value = window.scrollY > 50
