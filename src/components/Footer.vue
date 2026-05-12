@@ -14,34 +14,32 @@
             </div>
             <div>
               <div class="text-lg font-bold text-white">SiagaKita</div>
-              <div class="text-[10px] font-mono text-orange-400/70 tracking-widest uppercase">Safety Ecosystem</div>
+              <div class="text-[10px] font-mono text-orange-400/70 tracking-widest uppercase">{{ t('footer.tagline') }}</div>
             </div>
           </div>
-          <p class="text-sm text-white/40 leading-relaxed">
-            Integrated tourism emergency ecosystem connecting tourists, volunteers, and emergency agencies.
-          </p>
+          <p class="text-sm text-white/40 leading-relaxed">{{ t('footer.desc') }}</p>
         </div>
 
         <!-- Quick links -->
         <div>
-          <div class="text-xs font-mono text-white/30 uppercase tracking-widest mb-4">Quick Links</div>
+          <div class="text-xs font-mono text-white/30 uppercase tracking-widest mb-4">{{ t('footer.quickLinks') }}</div>
           <div class="space-y-2">
-            <a v-for="link in links" :key="link.label" :href="link.href" class="block text-sm text-white/50 hover:text-orange-400 transition-colors">
-              {{ link.label }}
+            <a v-for="link in links" :key="link.key" :href="link.href" class="block text-sm text-white/50 hover:text-orange-400 transition-colors">
+              {{ t(`nav.${link.key}`) }}
             </a>
           </div>
         </div>
 
         <!-- Status -->
         <div>
-          <div class="text-xs font-mono text-white/30 uppercase tracking-widest mb-4">System Status</div>
+          <div class="text-xs font-mono text-white/30 uppercase tracking-widest mb-4">{{ t('footer.systemStatus') }}</div>
           <div class="space-y-3">
             <div v-for="status in systemStatus" :key="status.name" class="flex items-center justify-between">
               <span class="text-sm text-white/50">{{ status.name }}</span>
               <div class="flex items-center gap-1.5">
                 <span class="w-2 h-2 rounded-full" :class="status.online ? 'bg-green-400 animate-pulse' : 'bg-red-400'"></span>
                 <span class="text-xs font-mono" :class="status.online ? 'text-green-400' : 'text-red-400'">
-                  {{ status.online ? 'Operational' : 'Offline' }}
+                  {{ status.online ? t('footer.operational') : t('footer.offline') }}
                 </span>
               </div>
             </div>
@@ -51,12 +49,10 @@
 
       <!-- Bottom bar -->
       <div class="border-t border-white/10 pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
-        <p class="text-xs font-mono text-white/20">
-          © 2025 SiagaKita. All Rights Reserved — HKI Registered Computer Program.
-        </p>
+        <p class="text-xs font-mono text-white/20">{{ t('footer.copyright') }}</p>
         <div class="flex items-center gap-2">
           <span class="w-2 h-2 rounded-full bg-green-400 animate-pulse"></span>
-          <span class="text-xs font-mono text-white/30">All systems operational</span>
+          <span class="text-xs font-mono text-white/30">{{ t('footer.allSystemsOk') }}</span>
         </div>
       </div>
     </div>
@@ -64,13 +60,17 @@
 </template>
 
 <script setup>
+import { useLang } from '../composables/useLang.js'
+
+const { t } = useLang()
+
 const links = [
-  { label: 'Home', href: '#home' },
-  { label: 'Documentation', href: '#about' },
-  { label: 'Research Paper', href: '#paper' },
-  { label: 'HKI Certificate', href: '#hki' },
-  { label: 'Poster', href: '#poster' },
-  { label: 'Download APK', href: '#install' },
+  { key: 'home',          href: '#home' },
+  { key: 'documentation', href: '#about' },
+  { key: 'paper',         href: '#paper' },
+  { key: 'hki',           href: '#hki' },
+  { key: 'poster',        href: '#poster' },
+  { key: 'apk',           href: '#install' },
 ]
 
 const systemStatus = [

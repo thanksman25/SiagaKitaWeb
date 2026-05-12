@@ -8,10 +8,10 @@
       <div ref="headerRef" class="text-center mb-12 opacity-0 translate-y-8">
         <div class="pill-badge mb-4">
           <span class="w-1.5 h-1.5 rounded-full bg-orange-400"></span>
-          RESEARCH & RESOURCES
+          {{ t('tabs.badge') }}
         </div>
         <h2 class="text-4xl md:text-5xl font-black text-white">
-          Explore <span class="text-gradient">SiagaKita</span>
+          {{ t('tabs.title1') }} <span class="text-gradient">{{ t('tabs.title2') }}</span>
         </h2>
       </div>
 
@@ -26,7 +26,7 @@
           @click="setTab(tab.id)"
         >
           <component :is="'span'" v-html="tab.iconSvg" class="w-4 h-4 flex-shrink-0"></component>
-          <span>{{ tab.label }}</span>
+          <span>{{ t(`tabs.${tab.id}`) }}</span>
         </button>
       </div>
 
@@ -38,14 +38,12 @@
             <div class="grid grid-cols-1 lg:grid-cols-5 gap-8">
               <!-- PDF Viewer -->
               <div class="lg:col-span-3 flex flex-col gap-4">
-                <div class="pill-badge w-fit">RESEARCH PAPER</div>
-                <h3 class="text-xl font-black text-white leading-tight">
-                  SiagaKita: Integrated Tourism Emergency Response &amp; Real-Time Tracking Ecosystem
-                </h3>
+                <div class="pill-badge w-fit">{{ t('tabs.paperSection.badge') }}</div>
+                <h3 class="text-xl font-black text-white leading-tight">{{ t('tabs.paperSection.title') }}</h3>
                 <!-- Status badge -->
                 <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-mono font-semibold w-fit" style="background:rgba(234,179,8,0.12);border:1px solid rgba(234,179,8,0.3);color:#FBBF24">
                   <span class="w-1.5 h-1.5 rounded-full bg-yellow-400 animate-pulse"></span>
-                  UNDER EDITORIAL REVIEW
+                  {{ t('tabs.paperSection.statusBadge') }}
                 </div>
                 <!-- Embedded PDF -->
                 <div class="rounded-2xl overflow-hidden border border-orange-500/20 shadow-xl shadow-black/40" style="height:680px">
@@ -65,31 +63,31 @@
                   style="background:linear-gradient(135deg,#FF5722,#E64A19)"
                 >
                   <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
-                  Download Full Paper (PDF)
+                  {{ t('tabs.paperSection.downloadBtn') }}
                 </a>
               </div>
 
               <!-- Sidebar -->
               <div class="lg:col-span-2 space-y-6">
                 <div class="glass-card p-6">
-                  <div class="text-xs font-mono text-white/40 uppercase tracking-widest mb-4">Paper Info</div>
+                  <div class="text-xs font-mono text-white/40 uppercase tracking-widest mb-4">{{ t('tabs.paperSection.infoLabel') }}</div>
                   <div class="space-y-3">
-                    <div v-for="meta in paperMeta" :key="meta.label" class="flex flex-col gap-0.5">
+                    <div v-for="meta in paperMeta" :key="meta.key" class="flex flex-col gap-0.5">
                       <div class="text-[10px] font-mono text-white/30 uppercase tracking-widest">{{ meta.label }}</div>
-                      <div class="text-sm font-semibold" :class="meta.pending ? 'text-yellow-400' : 'text-white/80'">{{ meta.value }}</div>
+                      <div class="text-sm font-semibold" :class="meta.pending ? 'text-yellow-400' : 'text-white/80'">{{ t(`tabs.paperSection.meta.${meta.key}`) }}</div>
                     </div>
                   </div>
                 </div>
 
                 <div class="glass-card p-6">
-                  <div class="text-xs font-mono text-white/40 uppercase tracking-widest mb-4">Keywords</div>
+                  <div class="text-xs font-mono text-white/40 uppercase tracking-widest mb-4">{{ t('tabs.paperSection.keywordsLabel') }}</div>
                   <div class="flex flex-wrap gap-2">
                     <span v-for="kw in keywords" :key="kw" class="px-2.5 py-1 rounded-lg text-xs font-mono bg-white/5 text-white/60 border border-white/10">{{ kw }}</span>
                   </div>
                 </div>
 
                 <div class="glass-card p-6">
-                  <div class="text-xs font-mono text-white/40 uppercase tracking-widest mb-4">Tech Stack</div>
+                  <div class="text-xs font-mono text-white/40 uppercase tracking-widest mb-4">{{ t('tabs.paperSection.techLabel') }}</div>
                   <div class="space-y-3">
                     <div v-for="tech in techStack" :key="tech.name" class="flex items-center justify-between">
                       <div class="flex items-center gap-2">
@@ -109,13 +107,13 @@
             <div class="grid grid-cols-1 lg:grid-cols-5 gap-8">
               <!-- PDF Viewer -->
               <div class="lg:col-span-3 flex flex-col gap-4">
-                <div class="pill-badge w-fit">INTELLECTUAL PROPERTY CERTIFICATE</div>
-                <h3 class="text-xl font-black text-white leading-tight">HKI Certificate</h3>
-                <p class="text-white/50 text-sm">Copyright of Computer Program — Republic of Indonesia</p>
+                <div class="pill-badge w-fit">{{ t('tabs.hkiSection.badge') }}</div>
+                <h3 class="text-xl font-black text-white leading-tight">{{ t('tabs.hkiSection.title') }}</h3>
+                <p class="text-white/50 text-sm">{{ t('tabs.hkiSection.subtitle') }}</p>
                 <!-- Status badge -->
                 <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-mono font-semibold w-fit" style="background:rgba(234,179,8,0.12);border:1px solid rgba(234,179,8,0.3);color:#FBBF24">
                   <span class="w-1.5 h-1.5 rounded-full bg-yellow-400 animate-pulse"></span>
-                  AWAITING ISSUANCE
+                  {{ t('tabs.hkiSection.statusBadge') }}
                 </div>
                 <!-- Embedded PDF -->
                 <div class="rounded-2xl overflow-hidden border border-orange-500/20 shadow-xl shadow-black/40" style="height:680px">
@@ -134,7 +132,7 @@
                   class="inline-flex items-center gap-3 px-5 py-2.5 rounded-xl font-semibold text-sm border border-orange-500/40 text-orange-400 hover:bg-orange-500/10 transition-all duration-300 hover:-translate-y-0.5 w-fit"
                 >
                   <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
-                  Download HKI Certificate (PDF)
+                  {{ t('tabs.hkiSection.downloadBtn') }}
                 </a>
               </div>
 
@@ -142,26 +140,26 @@
               <div class="lg:col-span-2 space-y-6">
                 <!-- Progress steps -->
                 <div class="glass-card p-6">
-                  <div class="text-xs font-mono text-white/40 uppercase tracking-widest mb-5">Submission Progress</div>
+                  <div class="text-xs font-mono text-white/40 uppercase tracking-widest mb-5">{{ t('tabs.hkiSection.progressLabel') }}</div>
                   <div class="space-y-3">
-                    <div v-for="(step, i) in hkiSteps" :key="step.label" class="flex items-center gap-3">
+                    <div v-for="(step, i) in hkiSteps" :key="i" class="flex items-center gap-3">
                       <div class="w-6 h-6 rounded-full flex items-center justify-center text-xs font-mono font-bold flex-shrink-0 transition-all"
                         :class="step.done ? 'bg-yellow-500 text-[#0A192F]' : 'border border-white/20 text-white/30'">
                         <svg v-if="step.done" class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
                         <span v-else class="text-[10px]">{{ i + 1 }}</span>
                       </div>
-                      <span class="text-sm font-mono" :class="step.done ? 'text-yellow-400' : 'text-white/25'">{{ step.label }}</span>
+                      <span class="text-sm font-mono" :class="step.done ? 'text-yellow-400' : 'text-white/25'">{{ t('tabs.hkiSection.steps')[i] }}</span>
                     </div>
                   </div>
                 </div>
 
                 <!-- Info fields -->
                 <div class="glass-card p-6">
-                  <div class="text-xs font-mono text-white/40 uppercase tracking-widest mb-4">Certificate Info</div>
+                  <div class="text-xs font-mono text-white/40 uppercase tracking-widest mb-4">{{ t('tabs.hkiSection.infoLabel') }}</div>
                   <div class="space-y-3">
-                    <div v-for="field in hkiFields" :key="field.label" class="flex flex-col gap-0.5">
+                    <div v-for="field in hkiFields" :key="field.key" class="flex flex-col gap-0.5">
                       <div class="text-[10px] font-mono text-white/30 uppercase tracking-widest">{{ field.label }}</div>
-                      <div class="text-sm text-white/70">{{ field.value }}</div>
+                      <div class="text-sm text-white/70">{{ t(`tabs.hkiSection.fields.${field.key}`) }}</div>
                     </div>
                   </div>
                 </div>
@@ -172,7 +170,7 @@
           <!-- Poster Tab -->
           <div v-else-if="activeTab === 'poster'" key="poster" id="poster" class="scroll-mt-24">
             <div class="max-w-3xl mx-auto">
-              <div class="pill-badge mb-6 mx-auto w-fit">RESEARCH POSTER</div>
+              <div class="pill-badge mb-6 mx-auto w-fit">{{ t('tabs.posterSection.badge') }}</div>
 
               <!-- Poster image frame -->
               <div
@@ -191,7 +189,7 @@
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/>
                     </svg>
-                    Click to view full size
+                    {{ t('tabs.posterSection.hoverHint') }}
                   </div>
                 </div>
               </div>
@@ -220,7 +218,7 @@
                       class="w-full h-auto rounded-xl shadow-2xl"
                     />
 
-                    <p class="text-center text-white/30 text-xs font-mono mt-3">Click outside or × to close</p>
+                    <p class="text-center text-white/30 text-xs font-mono mt-3">{{ t('tabs.posterSection.closeHint') }}</p>
                   </div>
                 </div>
               </Transition>
@@ -236,7 +234,7 @@
                   <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
                   </svg>
-                  Download Poster (High-Res PNG)
+                  {{ t('tabs.posterSection.downloadBtn') }}
                 </a>
               </div>
             </div>
@@ -246,7 +244,7 @@
           <!-- Install Tab -->
           <div v-else-if="activeTab === 'install'" key="install" id="install" class="scroll-mt-24">
             <div class="max-w-3xl mx-auto text-center">
-              <div class="pill-badge mb-8 mx-auto w-fit">ANDROID APPLICATION</div>
+              <div class="pill-badge mb-8 mx-auto w-fit">{{ t('tabs.installSection.badge') }}</div>
 
               <!-- Phone mockup area -->
               <div class="relative inline-block mb-12 animate-float">
@@ -259,10 +257,8 @@
                 </div>
               </div>
 
-              <h3 class="text-3xl font-black text-white mb-3">SiagaKita for Android</h3>
-              <p class="text-white/50 mb-8 max-w-md mx-auto">
-                Download SiagaKita for your Android device. Available as a Release APK, ready to install.
-              </p>
+              <h3 class="text-3xl font-black text-white mb-3">{{ t('tabs.installSection.title') }}</h3>
+              <p class="text-white/50 mb-8 max-w-md mx-auto">{{ t('tabs.installSection.desc') }}</p>
 
               <!-- App info grid -->
               <div class="grid grid-cols-3 gap-4 max-w-sm mx-auto mb-10">
@@ -282,18 +278,18 @@
                 <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M17.523 15.341a.998.998 0 01-.999-.999.998.998 0 01.999-.999.998.998 0 01.999.999.998.998 0 01-.999.999m-11.046 0a.998.998 0 01-.999-.999.998.998 0 01.999-.999.998.998 0 01.999.999.998.998 0 01-.999.999m11.405-6.02l1.997-3.459a.416.416 0 00-.152-.568.416.416 0 00-.568.152l-2.022 3.503A11.306 11.306 0 0012 7.851a11.306 11.306 0 00-5.137 1.099L4.841 5.447a.416.416 0 00-.568-.152.416.416 0 00-.152.568l1.997 3.459C2.689 11.187.343 14.659 0 18.761h24c-.344-4.102-2.689-7.574-6.118-9.44"/>
                 </svg>
-                Download APK — Android
+                {{ t('tabs.installSection.downloadBtn') }}
               </a>
 
-              <p class="text-xs font-mono text-white/30 mt-4">Flutter Release Build • ~58 MB • Requires Android 8.0+</p>
+              <p class="text-xs font-mono text-white/30 mt-4">{{ t('tabs.installSection.buildInfo') }}</p>
 
               <!-- Install steps -->
               <div class="mt-12 text-left glass-card p-6 max-w-md mx-auto">
-                <div class="text-xs font-mono text-white/40 uppercase tracking-widest mb-4">Installation Guide</div>
+                <div class="text-xs font-mono text-white/40 uppercase tracking-widest mb-4">{{ t('tabs.installSection.guideLabel') }}</div>
                 <div class="space-y-3">
                   <div v-for="(step, i) in installSteps" :key="i" class="flex items-start gap-3">
                     <div class="w-6 h-6 rounded-full bg-orange-500/20 border border-orange-500/40 flex items-center justify-center flex-shrink-0 text-xs font-mono text-orange-400">{{ i + 1 }}</div>
-                    <span class="text-sm text-white/60">{{ step }}</span>
+                    <span class="text-sm text-white/60">{{ t('tabs.installSection.steps')[i] }}</span>
                   </div>
                 </div>
               </div>
@@ -306,9 +302,12 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref, computed, onMounted, onUnmounted } from 'vue'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { useLang } from '../composables/useLang.js'
+
+const { t } = useLang()
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -354,10 +353,10 @@ const setTab = (id) => {
 }
 
 const paperMeta = [
-  { label: 'Authors', value: 'SiagaKita Team, 2025' },
-  { label: 'Category', value: 'Applied Technology' },
-  { label: 'Platform', value: 'Flutter + Golang' },
-  { label: 'Status', value: 'Under Review', pending: true },
+  { key: 'authors',  label: 'Authors',  pending: false },
+  { key: 'category', label: 'Category', pending: false },
+  { key: 'platform', label: 'Platform', pending: false },
+  { key: 'status',   label: 'Status',   pending: true  },
 ]
 
 const keywords = [
@@ -374,12 +373,12 @@ const techStack = [
 ]
 
 const hkiFields = [
-  { label: 'Program Name', value: 'SiagaKita — Integrated Emergency Response System' },
-  { label: 'Type', value: 'Computer Program (Software Application)' },
-  { label: 'Year First Published', value: '2025' },
-  { label: 'Creator', value: 'SiagaKita Team' },
-  { label: 'Copyright Holder', value: 'SiagaKita Team' },
-  { label: 'Status', value: 'Pending Issuance' },
+  { key: 'programName', label: 'Program Name' },
+  { key: 'type',        label: 'Type' },
+  { key: 'year',        label: 'Year First Published' },
+  { key: 'creator',     label: 'Creator' },
+  { key: 'holder',      label: 'Copyright Holder' },
+  { key: 'status',      label: 'Status' },
 ]
 
 const hkiSteps = [

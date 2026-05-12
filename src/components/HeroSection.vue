@@ -36,7 +36,7 @@
       <!-- Status badge -->
       <div ref="badgeRef" class="inline-flex items-center gap-2 pill-badge mb-8 opacity-0">
         <span class="w-2 h-2 rounded-full bg-green-400 animate-pulse"></span>
-        <span class="font-mono text-xs tracking-widest">SYSTEM ACTIVE — v2.0.1</span>
+        <span class="font-mono text-xs tracking-widest">{{ t('hero.badge') }}</span>
       </div>
 
       <!-- Headline -->
@@ -45,13 +45,16 @@
       </h1>
 
       <p ref="subtitleRef" class="text-xl md:text-2xl font-light text-white/80 max-w-3xl mx-auto mb-4 opacity-0">
-        Integrated Tourism Safety Ecosystem
+        {{ t('hero.subtitle') }}
       </p>
 
       <p ref="descRef" class="text-base md:text-lg text-white/50 max-w-2xl mx-auto mb-12 opacity-0 leading-relaxed">
-        Bridging the gap between <span class="text-orange-400 font-medium">tourists</span>, 
-        <span class="text-orange-400 font-medium">volunteers</span>, and 
-        <span class="text-orange-400 font-medium">emergency agencies</span> through real-time technology.
+        {{ t('hero.desc1') }}
+        <span class="text-orange-400 font-medium"> {{ t('hero.tourists') }}</span>,
+        <span class="text-orange-400 font-medium"> {{ t('hero.volunteers') }}</span>,
+        {{ lang === 'en' ? 'and' : 'dan' }}
+        <span class="text-orange-400 font-medium"> {{ t('hero.agencies') }}</span>
+        {{ t('hero.desc2') }}
       </p>
 
       <!-- CTAs -->
@@ -61,7 +64,7 @@
           id="hero-cta-explore"
           class="px-8 py-4 rounded-2xl font-semibold text-white border border-white/20 backdrop-blur-sm transition-all duration-300 hover:border-orange-500/50 hover:bg-orange-500/10 hover:-translate-y-1"
         >
-          Explore Ecosystem
+          {{ t('hero.ctaExplore') }}
         </a>
         <a
           href="https://github.com/thanksman25/SiagaKitaWeb/releases/download/V1.0/SiagaKita.apk"
@@ -72,26 +75,30 @@
           <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
             <path d="M17.523 15.341a.998.998 0 01-.999-.999.998.998 0 01.999-.999.998.998 0 01.999.999.998.998 0 01-.999.999m-11.046 0a.998.998 0 01-.999-.999.998.998 0 01.999-.999.998.998 0 01.999.999.998.998 0 01-.999.999m11.405-6.02l1.997-3.459a.416.416 0 00-.152-.568.416.416 0 00-.568.152l-2.022 3.503A11.306 11.306 0 0012 7.851a11.306 11.306 0 00-5.137 1.099L4.841 5.447a.416.416 0 00-.568-.152.416.416 0 00-.152.568l1.997 3.459C2.689 11.187.343 14.659 0 18.761h24c-.344-4.102-2.689-7.574-6.118-9.44"/>
           </svg>
-          Download for Android
+          {{ t('hero.ctaDownload') }}
         </a>
       </div>
 
       <!-- Stats row -->
       <div ref="statsRef" class="grid grid-cols-3 gap-6 max-w-2xl mx-auto opacity-0">
-        <div
-          v-for="stat in stats"
-          :key="stat.label"
-          class="glass rounded-xl p-4 hud-border"
-        >
-          <div class="text-2xl font-black text-gradient">{{ stat.value }}</div>
-          <div class="text-xs font-mono text-white/50 mt-1 uppercase tracking-widest">{{ stat.label }}</div>
+        <div class="glass rounded-xl p-4 hud-border">
+          <div class="text-2xl font-black text-gradient">10s</div>
+          <div class="text-xs font-mono text-white/50 mt-1 uppercase tracking-widest">{{ t('hero.stats.sos') }}</div>
+        </div>
+        <div class="glass rounded-xl p-4 hud-border">
+          <div class="text-2xl font-black text-gradient">4</div>
+          <div class="text-xs font-mono text-white/50 mt-1 uppercase tracking-widest">{{ t('hero.stats.actors') }}</div>
+        </div>
+        <div class="glass rounded-xl p-4 hud-border">
+          <div class="text-2xl font-black text-gradient">24/7</div>
+          <div class="text-xs font-mono text-white/50 mt-1 uppercase tracking-widest">{{ t('hero.stats.monitoring') }}</div>
         </div>
       </div>
     </div>
 
     <!-- Scroll indicator -->
     <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 animate-float">
-      <span class="text-xs font-mono text-white/30 tracking-widest uppercase">Scroll</span>
+      <span class="text-xs font-mono text-white/30 tracking-widest uppercase">{{ t('hero.scroll') }}</span>
       <div class="w-px h-8 bg-gradient-to-b from-orange-500/50 to-transparent"></div>
     </div>
   </section>
@@ -100,6 +107,9 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import { gsap } from 'gsap'
+import { useLang } from '../composables/useLang.js'
+
+const { lang, t } = useLang()
 
 const videoRef = ref(null)
 const badgeRef = ref(null)
@@ -111,12 +121,6 @@ const statsRef = ref(null)
 
 const videoSrc = '/IMG_3523.MOV'
 
-const stats = [
-  { value: '10s', label: 'SOS Response' },
-  { value: '3', label: 'Key Actors' },
-  { value: '24/7', label: 'Monitoring' },
-]
-
 onMounted(() => {
   const tl = gsap.timeline({ delay: 0.3 })
   tl.to(badgeRef.value, { opacity: 1, y: 0, duration: 0.6, ease: 'power3.out', clearProps: 'transform' })
@@ -126,7 +130,6 @@ onMounted(() => {
     .to(ctaRef.value, { opacity: 1, y: 0, duration: 0.6, ease: 'power3.out' }, '-=0.3')
     .to(statsRef.value, { opacity: 1, y: 0, duration: 0.6, ease: 'power3.out' }, '-=0.2')
 
-  // Preload video
   if (videoRef.value) {
     videoRef.value.playbackRate = 0.7
   }
